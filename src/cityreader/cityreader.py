@@ -19,7 +19,7 @@ class City:
 # In the body of the `cityreader` function, use Python's built-in "csv" module
 # to read this file so that each record is imported into a City instance. Then
 # return the list with all the City instances from the function.
-# Google "python 3 csv" for references and use your Google-fu for other examples.
+# Google "python 3 csv" for references and use your Google-fu for other ecityamples.
 #
 # Store the instances in the "cities" list, below.
 #
@@ -59,10 +59,10 @@ for c in cities:
 # Be aware that the user could specify either a lower-left/upper-right pair of
 # coordinates, or an upper-left/lower-right pair of coordinates. Hint: normalize
 # the input data so that it's always one or the other, then search for cities.
-# In the example below, inputting 32, -120 first and then 45, -100 should not
+# In the ecityample below, inputting 32, -120 first and then 45, -100 should not
 # change the results of what the `cityreader_stretch` function returns.
 #
-# Example I/O:
+# Ecityample I/O:
 #
 # Enter lat1,lon1: 45,-100
 # Enter lat2,lon2: 32,-120
@@ -72,7 +72,7 @@ for c in cities:
 # Los Angeles: (34.114,-118.4068)
 # Las Vegas: (36.2288,-115.2603)
 # Denver: (39.7621,-104.8759)
-# Phoenix: (33.5722,-112.0891)
+# Phoenicity: (33.5722,-112.0891)
 # Tucson: (32.1558,-110.8777)
 # Salt Lake City: (40.7774,-111.9301)
 
@@ -82,9 +82,32 @@ for c in cities:
 def cityreader_stretch(lat1, lon1, lat2, lon2, cities=[]):
     # within will hold the cities that fall within the specified region
     within = []
-
-    # TODO Ensure that the lat and lon valuse are all floats
-    # Go through each city and check to see if it falls within
-    # the specified coordinates.
-
+    if lon1 > lon2 and lat1 > lat2:
+        within = [city for city in cities if lon1 >
+                  city.lon > lon2 and lat1 > city.lat > lat2]
+    elif lon1 > lon2 and lat1 < lat2:
+        within = [city for city in cities if lon1 >
+                  city.lon > lon2 and lat1 < city.lat < lat2]
+    elif lon1 < lon2 and lat1 < lat2:
+        within = [city for city in cities if lon1 <
+                  city.lon < lon2 and lat1 < city.lat < lat2]
+    elif lon1 < lon2 and lat1 > lat2:
+        within = [city for city in cities if lon1 <
+                  city.lon < lon2 and lat1 > city.lat < lat2]
     return within
+
+
+def main():
+    lat = input(
+        'Please Enter Your First Latitude:')
+    lon = input('Please Enter Your Second Longitude:')
+    lat2 = input(
+        'Please Enter Your Second Latitude:')
+    lon2 = input('Please Enter Your Second Longitude:')
+    result_finder = cityreader_stretch(float(lat), float(
+        lon), float(lat2), float(lon2), cities)
+    print(result_finder)
+
+
+if __name__ == '__main__':
+    main()
